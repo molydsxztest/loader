@@ -1,41 +1,50 @@
-# Compiled Lua sources
-luac.out
+if not syn then return game:GetService("Players").LocalPlayer:Kick("Oblivity - Synapse ONLY, Please use Synapse X in order to use Oblivity.") end
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
+function SendNotification(title, text)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = title,
+        Text = text
+    })
+end
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
 
-# Precompiled Headers
-*.gch
-*.pch
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
+--// Loaded Check
+do
+    if getgenv().OblivityLoaded then
+        if getgenv().OblivityLoaded2 then
+            return game:GetService("Players").LocalPlayer:Kick("Oblivity - Too many executions, If Oblivity isn't working, Please rejoin")
+        end
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+        getgenv().OblivityLoaded2 = true
+        return SendNotification("Oblivity", "Already loaded.")
+    end
+    
+    getgenv().OblivityLoaded = true
+end
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+
+
+local supportedgames = {
+    ['2788229376'] = 'https://scripts.luawl.com/hosted/1201/18765/DXMDahood.lua',
+    ['7336302630'] = 'https://scripts.luawl.com/hosted/1201/17405/DXMDelta.lua',
+
+}
+
+
+for i,v in pairs(supportedgames) do 
+    if tonumber(i) == game.PlaceId or i == game.PlaceId then
+        has_found_game = true
+        loadstring(game:HttpGet(v))()
+        break
+    end 
+end
+
+
+
+if not s and e then
+    setclipboard(tostring(e))
+    return game:GetService("Players").LocalPlayer:Kic("Oblivity - Loader Error Occured, Copied Error to Clipboard, Please DM this to Demo.")
+end
+
 
